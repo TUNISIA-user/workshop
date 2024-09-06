@@ -4,6 +4,26 @@
 // add this library its awsome 
 //
 npm i react-toastify
+<pre>
+
+      import React from 'react';
+
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  
+  function App(){
+    const notify = () => toast("Wow so easy!");
+
+    return (
+      <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div>
+    );
+  }
+
+
+    </pre>
 
 // 
 app.put("/v3/posts/:channelId", async (req, res) => {
