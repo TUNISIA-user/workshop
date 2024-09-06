@@ -5,6 +5,10 @@ app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
     res.send(Data)
 }))
 
+const video = await Videos.findById(videoId).populate('comments.user', 'name');  // 'name' is the field you want to fetch from the User model
+
+this is joinutre i search for it 
+
 using midlle
 // add this library its awsome 
 //
