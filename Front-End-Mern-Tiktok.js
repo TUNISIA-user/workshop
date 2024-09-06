@@ -2,12 +2,12 @@
 app.put("/v3/posts/:channelId", async (req, res) => {
     try {
         // Extract channel ID and comment details from the request
-        const { channelId } = req.params;
+        const { channelId } = req.params; // destraction
         const { text, userId } = req.body;
 
         // Update the video with the specified channel by adding a new comment
         const updatedData = await Videos.updateMany(
-            { channel: channelId },
+            { channel: channelId }, // if this condtion said true should be the item does not push nothgin ? 
             { $push: { comments: { text, user: userId, createdAt: new Date() } } } // Add comment with text and user ID
         );
 
