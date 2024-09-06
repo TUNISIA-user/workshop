@@ -1,14 +1,14 @@
 // add comment to video by channel
-app.put("/v3/posts/:66da38171f2ca5641beb0783", async (req, res) => {
+app.put("/v3/posts/:channelId", async (req, res) => {
     try {
+        // Extract channel ID and comment details from the request
+        const { channelId } = req.params;
+        const { text, userId } = req.body;
+
+        // Update the video with the specified channel by adding a new comment
         const updatedData = await Videos.updateMany(
-            { channel: req.params.id },
-            { $set: req.body } // i wanna here specif storage in section comment like this 
-            // comments : [
-              'text : "should be like this this comment",
-              "_id" : and here for sure we wanna pass id user do comment to this post 
-            do you see my logique good ?
-            ]
+            { channel: channelId },
+            { $push: { comments: { text, user: userId, createdAt: new Date() } } } // Add comment with text and user ID
         );
 
         if (updatedData.matchedCount === 0) {
@@ -21,6 +21,7 @@ app.put("/v3/posts/:66da38171f2ca5641beb0783", async (req, res) => {
         res.status(500).json({ message: "Error updating data", error: err });
     }
 });
+
 
 // here i think should be work with local host 
 
