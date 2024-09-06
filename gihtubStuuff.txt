@@ -1,0 +1,57 @@
+to push in repostry 
+
+git init
+git add .
+git commit -m "change__title"
+git branch -M main
+git remote add origin <your-repo-url>
+git push -u origin main
+
+change your branche 
+git branch -a
+git checkout <branch-name>
+git checkout main
+git checkout -b <new-branch-name>
+git checkout -b FORK__NEW__BRANCHE origin/FORK__NEW__BRANCHE
+
+git branch 
+git checkout FORK__NEW__BRANCHE
+
+// Stage changes: git add .
+Commit changes: git commit -m "Your message"
+View commit history: git log
+Reset to a specific commit: git reset --hard <commit-hash>
+Revert a specific commit: git revert <commit-hash>
+Push changes: git push origin <branch-name>
+
+git revert bc2da4c17e1a5cb1987a698e2ddf29022d627b9d
+git commit -m "Describe your changes here"
+git stash
+
+ git revert    bc2da4c17e1a5cb1987a698e2ddf29022d627b9d  
+
+
+//
+
+Steps to Reset to a Specific Commit this to return in your place 
+
+git add .
+git commit -m "Midel__work__to_try__push__Myfunction__3"
+git stash
+git reset --hard bc2da4c17e1a5cb1987a698e2ddf29022d627b9d
+git push origin <NAME__BRANCHE> --force
+--------------------
+
+
+when i  create new branch
+1. Fetch the Latest Changes
+
+1)git fetch<
+2)git branch -a
+3)git checkout -b FORK__NEW__BRANCHE origin/FORK__NEW__BRANCHE 
+
+
+
+
+
+
