@@ -7,7 +7,7 @@ app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
 }))
 
 
-
+failed: message: Cast to Number failed for value \"This is a message\" (type string) at path \"message\""
 
 
 {
