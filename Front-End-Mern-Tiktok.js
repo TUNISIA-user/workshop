@@ -1,9 +1,36 @@
-
+$push: This is the MongoDB operator used to append values to an array.
+    
 app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
     const Data = await  Videos.findById(req.params.id)
     console.log(Data)
     res.send(Data)
 }))
+
+
+
+funnny mistake 
+{
+    "text": "This is my comment",
+    "userId": "64fcb35a012e3a4e34f9810b"   
+}
+   const updatedData = await Videos.updateOne(
+            { _id: req.params.id },
+            { $push: { comments: { text : text, user: user, createdAt: new Date() } } }
+            
+        );
+
+comments : [
+{
+    "text": "This is my comment",                   // i was like this send the data
+    "userId": "64fcb35a012e3a4e34f9810b"   
+}                                                   
+
+]
+
+
+
+
+
 
 const video = await Videos.findById(videoId).populate('comments.user', 'name');  // 'name' is the field you want to fetch from the User model
 
