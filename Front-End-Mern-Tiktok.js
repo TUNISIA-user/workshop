@@ -8,6 +8,22 @@ app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
 
 
 
+
+
+{
+  "url": "https://example.com/video.mp4",
+  "channel": "MyChannel",
+  "desc": "This is a video description",
+  "song": "Song Name",
+  "like1": 100,
+  "message": "This is a message",
+  "share": 50,
+  "comments": "Great video!",
+  "img1": "https://example.com/image.jpg"
+}
+
+
+
 funnny mistake 
 {
     "text": "This is my comment",
