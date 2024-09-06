@@ -1,6 +1,11 @@
-// add comment to video by channel
 
+app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
+    const Data = await  Videos.findById(req.params.id)
+    console.log(Data)
+    res.send(Data)
+}))
 
+using midlle
 // add this library its awsome 
 //
 npm i react-toastify
