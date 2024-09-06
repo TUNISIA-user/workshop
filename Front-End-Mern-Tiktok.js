@@ -1,4 +1,11 @@
 // add comment to video by channel
+
+
+// add this library its awsome 
+//
+npm i react-toastify
+
+// 
 app.put("/v3/posts/:channelId", async (req, res) => {
     try {
         // Extract channel ID and comment details from the request
@@ -7,7 +14,7 @@ app.put("/v3/posts/:channelId", async (req, res) => {
 
         // Update the video with the specified channel by adding a new comment
         const updatedData = await Videos.updateMany(
-            { channel: channelId }, // if this condtion said true should be the item does not push nothgin ? 
+            { channel: channelId },
             { $push: { comments: { text, user: userId, createdAt: new Date() } } } // Add comment with text and user ID
         );
 
