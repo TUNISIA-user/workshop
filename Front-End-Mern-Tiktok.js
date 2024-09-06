@@ -8,7 +8,7 @@ app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
 
 
 failed: message: Cast to Number failed for value \"This is a message\" (type string) at path \"message\""
-
+// this error appear when message waiting value and then give him other value 
 
 {
   "url": "https://example.com/video.mp4",
@@ -142,3 +142,13 @@ app.use(cors({
     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
 }));
  this to access any origin to work in requests metohde
+
+
+
+  const videos = await Videos.find({ user: req.params.userid })
+            .populate('user', 'username') // Populate the 'user' field with the username
+            .populate({
+                path: 'comments.user', // Nested populate to handle the user field within comments
+                select: 'username' // Only include the username in the populated comments
+            });
+this way to do join 
