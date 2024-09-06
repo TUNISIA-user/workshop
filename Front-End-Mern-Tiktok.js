@@ -17,7 +17,8 @@ npm i react-toastify
     return (
       <div>
         <button onClick={notify}>Notify!</button>
-        <ToastContainer />
+        <ToastContainer /> // should be this evey time put in bootom 
+     
       </div>
     );
   }
@@ -25,7 +26,7 @@ npm i react-toastify
 
     </pre>
 
-// 
+// --------------------------------------------
 app.put("/v3/posts/:channelId", async (req, res) => {
     try {
         // Extract channel ID and comment details from the request
@@ -49,6 +50,31 @@ app.put("/v3/posts/:channelId", async (req, res) => {
     }
 });
 
+app.put("/v3/posts/:id", async (req, res) => {
+    try {
+        // Extract comment details from the request body
+        const { text, userId } = req.body;
+
+        // Update the video (or post) with the specified id by adding a new comment
+        const updatedData = await Videos.updateOne(
+            { _id: req.params.id }, // Find the video (or post) with the matching ID
+            { $push: { comments: { text, user: userId, createdAt: new Date() } } } // Push new comment into the "comments" array
+        );
+
+        // Check if the update was successful
+        if (updatedData.nModified === 1) {
+            res.status(200).json({ message: "Comment added successfully", updatedData });
+        } else {
+            res.status(404).json({ message: "Post not found or no changes made" });
+        }
+    } catch (error) {
+        console.error("Error updating post:", error);
+        res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+});
+
+
+//  add comment  by one  user 
 
 // here i think should be work with local host 
 
