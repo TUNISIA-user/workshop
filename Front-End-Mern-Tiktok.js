@@ -6,7 +6,9 @@ app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
     res.send(Data)
 }))
 npm install @ffmpeg/ffmpeg
-
+export 'createFFmpeg' (imported as 'createFFmpeg') was not found in '@ffmpeg/ffmpeg' (possible exports: FFmpeg)
+ERROR in ./src/Component/Upload.js 45:46-55
+export 'fetchFile' (imported as 'fetchFile') was not found in '@ffmpeg/ffmpeg' (possible exports: FFmpeg)
 
 failed: message: Cast to Number failed for value \"This is a message\" (type string) at path \"message\""
 // this error appear when message waiting value and then give him other value 
