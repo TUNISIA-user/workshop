@@ -1,3 +1,28 @@
+
+
+
+
+
+  console.log(updatebio,Move.tokn_user.token)
+  try{
+    const responseData = await axios.post(`/biosUsers/Update/${Move.tokn_user.token}`,{
+       text :updatebio
+    })
+
+    setCommentUser(updatebio);
+
+   toast.success("the bio Modfied success")
+  }
+
+  catch(eroor){
+    console.log(`this eror by ${eroor}`)
+  }
+ } this way to relod 
+
+
+
+
+---------------------
 $push: This is the MongoDB operator used to append values to an array.
 dont forget <label> for select file 
 app.put("/v3/posts/:id",asyncHandler(async(req,res,next)=>{
