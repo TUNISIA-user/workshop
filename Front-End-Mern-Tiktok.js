@@ -9,7 +9,7 @@
        text :updatebio
     })
 
-    setCommentUser(updatebio);
+    setCommentUser(updatebio); 
 
    toast.success("the bio Modfied success")
   }
