@@ -1,0 +1,58 @@
+// Remove item from basket
+const handleRemove = async (id) => {
+  try {
+    console.log(id);
+    
+    // Use a query parameter to send the id1
+    await axios.delete(`http://localhost:5000/removeItem/${auth.userId}?id1=${id}`);
+    
+  } catch (error) {
+    console.log(`This error occurred: ${error}`);
+  }
+
+  try {
+    // Fetch updated user data
+    const userResponse = await axios.get(`http://localhost:5000/Udata/${auth.userId}`);
+    console.log(userResponse.data);
+
+    // Dispatch updated basket data
+    dispatch({
+      type: 'ADD__TO__CARD',
+      payload: userResponse.data,
+    });
+  } catch (error) {
+    console.error(`Error removing item from database: ${error.response?.data || error.message}`);
+  }
+};
+this idea its good for deltet thing 
+
+
+
+      app.delete("/removeItem/:id", async (req, res) => {
+        const { id1 } = req.query; // Get id1 from the query parameters
+      
+        try {
+          const user = await Users.findById(req.params.id);
+          console.log(user, "current request");
+      
+          if (!user) {
+            return res.status(404).send('User not found');
+          }
+      
+          // Filter out the item with the given id1
+          const updatedBasket = user.basket.filter((item) => item.id !== id1);
+      
+          if (user.basket.length === updatedBasket.length) {
+            return res.status(404).send('Item not found in basket');
+          }
+      
+          console.log(updatedBasket, "<===>");
+          user.basket = updatedBasket; // Update the user's basket
+          await user.save();
+      
+          res.status(200).send({ message: "Item removed successfully", basket: user.basket });
+        } catch (error) {
+          console.log(`Error removing item: ${error}`);
+          res.status(500).send('Error removing item');
+        }
+      });
