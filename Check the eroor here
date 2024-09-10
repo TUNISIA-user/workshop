@@ -1,3 +1,123 @@
+
+.PageAdmin{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ContainerPageAdmin{
+    width: 97%;
+     height: auto; /* should be fix here  */
+    background-color: #4a4545;
+    display: flex;
+    gap: 10px;
+}
+
+ 
+.dataFromDataBase{
+    width: 60%;
+    height: auto;
+    background-color: rgb(159, 159, 159);
+}
+.DataBaseCasquette{
+    width:25%;
+    height: 100%;
+    background-color: rgb(222, 219, 219);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.DataBaseSAQUE{
+    width:10%;
+    height: 100%;
+    background-color: rgb(33, 11, 181);
+}
+
+.DataBaseLunnete{
+    width:30%;
+    height: 100%;
+    background-color: rgb(59, 244, 22);
+}
+ 
+
+.cardData{
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    span{
+        color: red;
+        font-family: sans-serif;
+    }
+}
+
+.card__casquette{
+    .titleCard{
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        text-align: center;
+    }
+}
+.containerCasquetetex{
+    
+    height: 200px;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1px;
+}
+.CardOwner{
+    border: 1px solid black;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: small;
+    }
+    img{
+        width: 70px;
+        height: 60px;
+        object-fit: cover;
+    }
+}
+
+.delte__section{
+    background-color: green;
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    input{
+        padding: 10px;
+        border: none;
+        margin: 7px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    button{
+        padding: 10px;
+        background-color: red;
+        color: white;
+        font-size: 24px;
+        border-radius: 10px;
+    }
+}.xd{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
 // Remove item from basket
 const handleRemove = async (id) => {
   try {
