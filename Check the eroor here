@@ -58,3 +58,134 @@ this idea its good for deltet thing
       });
 
 when you using delte you should pass the parrimter in header }?id1=${id}` 
+
+
+
+
+import React ,{useEffect,useState}from 'react'
+import "./PageAdmin.css"
+import axios from "./axios"
+import { useGlobalContext } from './context/GlobalContext'
+import BASEADDDATA from './BASEADDDATA'
+
+
+const PageAdmin = () => {
+    const {auth} = useGlobalContext()
+    const [UsersForAdmin,setUsersFOrAdmin] = useState([])
+    const [userCasuette,setUserCasquette] = useState([])
+
+
+    const Handel__Api = async()=>{
+       try{
+        const Reponse = await axios.get("/ADMIN")
+        const Rpons2 = await axios.get("/casquettes")
+        setUserCasquette(Rpons2.data)
+        setUsersFOrAdmin(Reponse.data)
+        console.log(Reponse.data,Rpons2)
+       }
+       catch(error){
+        console.log(`this eroor by ${error}`)
+       }
+    }
+
+
+ useEffect(()=>{
+  Handel__Api()
+  
+ },[])
+  return (
+    
+<div
+  className="PageAdmin"
+  style={auth.testAdmin === "true" ? { display: "flex" } : { display: "none" }}
+>
+       <h2>Welcome to Page Admin</h2>
+       <br/>
+     <div className="ContainerPageAdmin">
+        
+       <div className="x dataFromDataBase">
+
+        <div className='User__Data__Base'>
+
+        <div className='APPcontainerData'>  
+          <div className='xd'>users</div>
+          {UsersForAdmin.map((item)=>{
+            return <div className='cardData'>
+              <h2>  <span >id : </span>   {item._id}</h2>
+              <h2> <span>username :  </span>   {item.username}</h2>
+              <h2>  <span>email : </span> {item.email}</h2>
+              
+            </div>
+            
+           
+            
+          })}
+        </div>
+
+ 
+        <div className='card__casquette'>
+          <div className='titleCard'>Casquette</div>
+          
+          <div className='containerCasquetetex'>
+               {userCasuette.map((item)=>{
+                return <div className='CardOwner'>
+                  <p>{item._id}</p>
+                  
+                
+                  <img src={`http://localhost:5000/${item.imgItem}`}/>
+                </div>   
+               })}
+          </div>
+
+
+        </div>
+
+        <div className='card__casquette'>
+          <div className='titleCard'>sac</div>
+          
+          <div className='containerCasquetetex'>
+               {userCasuette.map((item)=>{
+                return <div className='CardOwner'>
+                  <p>{item._id}</p>
+                  
+                
+                  <img src={`http://localhost:5000/${item.imgItem}`}/>
+                </div>   
+               })}
+          </div>
+
+
+        </div>
+
+
+
+
+          </div> 
+
+       </div>
+
+       
+       <div className="x DataBaseCasquette">
+        <BASEADDDATA/>
+        <br/>
+        <div className='delte__section'>   
+         <input type='text' placeholder='saisr id refernce' />
+         <button>DELETE</button>
+         </div>  
+       </div>
+       
+       <div className="x DataBaseSAQUE"></div>
+       <div className="x DataBaseLunnete"></div>
+
+
+
+        </div>
+         
+    </div>
+  )
+}
+
+export default PageAdmin
+
+
+minimize
