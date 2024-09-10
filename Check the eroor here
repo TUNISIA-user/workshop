@@ -56,3 +56,5 @@ this idea its good for deltet thing
           res.status(500).send('Error removing item');
         }
       });
+
+when you using delte you should pass the parrimter in header }?id1=${id}` 
