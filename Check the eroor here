@@ -1,1 +1,313 @@
  
+ 
+
+.PageAdmin{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ContainerPageAdmin{
+    width: 97%;
+     height: auto; /* should be fix here  */
+    background-color: #4a4545;
+    display: flex;
+    gap: 10px;
+}
+
+ 
+.dataFromDataBase{
+    width: 60%;
+    height: auto;
+    background-color: rgb(159, 159, 159);
+}
+.DataBaseCasquette{
+    width:25%;
+    height: 100%;
+    background-color: rgb(222, 219, 219);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.DataBaseSAQUE{
+    width:10%;
+    height: 100%;
+    background-color: rgb(33, 11, 181);
+}
+
+.DataBaseLunnete{
+    width:30%;
+    height: 100%;
+    background-color: rgb(59, 244, 22);
+}
+ 
+
+.cardData{
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    span{
+        color: red;
+        font-family: sans-serif;
+    }
+}
+
+.card__casquette{
+    .titleCard{
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        text-align: center;
+    }
+}
+.containerCasquetetex{
+    
+    height: 200px;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1px;
+}
+.CardOwner{
+    border: 1px solid black;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: small;
+    }
+    img{
+        width: 70px;
+        height: 60px;
+        object-fit: cover;
+    }
+}
+
+.delte__section{
+    background-color: green;
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    input{
+        padding: 10px;
+        border: none;
+        margin: 7px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    button{
+        padding: 10px;
+        background-color: red;
+        color: white;
+        font-size: 24px;
+        border-radius: 10px;
+    }
+}.xd{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+// Remove item from basket
+const handleRemove = async (id) => {
+  try {
+    console.log(id);
+    
+    // Use a query parameter to send the id1
+    await axios.delete(`http://localhost:5000/removeItem/${auth.userId}?id1=${id}`);
+    
+  } catch (error) {
+    console.log(`This error occurred: ${error}`);
+  }
+
+  try {
+    // Fetch updated user data
+    const userResponse = await axios.get(`http://localhost:5000/Udata/${auth.userId}`);
+    console.log(userResponse.data);
+
+    // Dispatch updated basket data
+    dispatch({
+      type: 'ADD__TO__CARD',
+      payload: userResponse.data,
+    });
+  } catch (error) {
+    console.error(`Error removing item from database: ${error.response?.data || error.message}`);
+  }
+};
+this idea its good for deltet thing 
+
+
+
+      app.delete("/removeItem/:id", async (req, res) => {
+        const { id1 } = req.query; // Get id1 from the query parameters
+      
+        try {
+          const user = await Users.findById(req.params.id);
+          console.log(user, "current request");
+      
+          if (!user) {
+            return res.status(404).send('User not found');
+          }
+      
+          // Filter out the item with the given id1
+          const updatedBasket = user.basket.filter((item) => item.id !== id1);
+      
+          if (user.basket.length === updatedBasket.length) {
+            return res.status(404).send('Item not found in basket');
+          }
+      
+          console.log(updatedBasket, "<===>");
+          user.basket = updatedBasket; // Update the user's basket
+          await user.save();
+      
+          res.status(200).send({ message: "Item removed successfully", basket: user.basket });
+        } catch (error) {
+          console.log(`Error removing item: ${error}`);
+          res.status(500).send('Error removing item');
+        }
+      });
+
+when you using delte you should pass the parrimter in header }?id1=${id}` 
+
+
+
+
+import React ,{useEffect,useState}from 'react'
+import "./PageAdmin.css"
+import axios from "./axios"
+import { useGlobalContext } from './context/GlobalContext'
+import BASEADDDATA from './BASEADDDATA'
+
+
+const PageAdmin = () => {
+    const {auth} = useGlobalContext()
+    const [UsersForAdmin,setUsersFOrAdmin] = useState([])
+    const [userCasuette,setUserCasquette] = useState([])
+
+
+    const Handel__Api = async()=>{
+       try{
+        const Reponse = await axios.get("/ADMIN")
+        const Rpons2 = await axios.get("/casquettes")
+        setUserCasquette(Rpons2.data)
+        setUsersFOrAdmin(Reponse.data)
+        console.log(Reponse.data,Rpons2)
+       }
+       catch(error){
+        console.log(`this eroor by ${error}`)
+       }
+    }
+
+
+ useEffect(()=>{
+  Handel__Api()
+  
+ },[])
+  return (
+    
+<div
+  className="PageAdmin"
+  style={auth.testAdmin === "true" ? { display: "flex" } : { display: "none" }}
+>
+       <h2>Welcome to Page Admin</h2>
+       <br/>
+     <div className="ContainerPageAdmin">
+        
+       <div className="x dataFromDataBase">
+
+        <div className='User__Data__Base'>
+
+        <div className='APPcontainerData'>  
+          <div className='xd'>users</div>
+          {UsersForAdmin.map((item)=>{
+            return <div className='cardData'>
+              <h2>  <span >id : </span>   {item._id}</h2>
+              <h2> <span>username :  </span>   {item.username}</h2>
+              <h2>  <span>email : </span> {item.email}</h2>
+              
+            </div>
+            
+           
+            
+          })}
+        </div>
+
+ 
+        <div className='card__casquette'>
+          <div className='titleCard'>Casquette</div>
+          
+          <div className='containerCasquetetex'>
+               {userCasuette.map((item)=>{
+                return <div className='CardOwner'>
+                  <p>{item._id}</p>
+                  
+                
+                  <img src={`http://localhost:5000/${item.imgItem}`}/>
+                </div>   
+               })}
+          </div>
+
+
+        </div>
+
+        <div className='card__casquette'>
+          <div className='titleCard'>sac</div>
+          
+          <div className='containerCasquetetex'>
+               {userCasuette.map((item)=>{
+                return <div className='CardOwner'>
+                  <p>{item._id}</p>
+                  
+                
+                  <img src={`http://localhost:5000/${item.imgItem}`}/>
+                </div>   
+               })}
+          </div>
+
+
+        </div>
+
+
+
+
+          </div> 
+
+       </div>
+
+       
+       <div className="x DataBaseCasquette">
+        <BASEADDDATA/>
+        <br/>
+        <div className='delte__section'>   
+         <input type='text' placeholder='saisr id refernce' />
+         <button>DELETE</button>
+         </div>  
+       </div>
+       
+       <div className="x DataBaseSAQUE"></div>
+       <div className="x DataBaseLunnete"></div>
+
+
+
+        </div>
+         
+    </div>
+  )
+}
+
+export default PageAdmin
+
+
+minimize
