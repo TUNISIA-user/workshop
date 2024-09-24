@@ -314,3 +314,15 @@ export default PageAdmin
 
 
 minimize
+
+
+
+import { flushSync } from 'react-dom';
+
+flushSync(() => {
+  setSomething(123);
+});
+
+
+
+
