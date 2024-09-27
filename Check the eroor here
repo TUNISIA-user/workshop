@@ -1,6 +1,13 @@
+         {messages.slice().reverse().map(b=>
+                  
+                   <>
+                  <div key={b._id} className={b.senderId===TokenUser._id  ? 'oneToneLeft' : 'oneToOne'}>
+                    
+                    <h2 >  {b.content} <br/>  {b.senderId} </h2>
+                     
  
  
- 
+ this slice to tale copy 
  
  
 
