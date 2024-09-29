@@ -10,7 +10,7 @@ git push -u origin main
 change your branche 
 git branch -a
 git checkout <branch-name>
-git checkout main
+git checkout main 
 git checkout -b <new-branch-name>
 git checkout -b FORK__NEW__BRANCHE origin/FORK__NEW__BRANCHE
 
